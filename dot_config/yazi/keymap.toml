@@ -1,0 +1,4 @@
+[manager]
+append_keymap = [
+  { on = [ "g", "p" ],       run = "cd ~/Projects",   desc = "Go to the projects directory" },
+]
