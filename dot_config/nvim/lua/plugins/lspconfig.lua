@@ -214,6 +214,47 @@ return {
         },
       }
 
+      local lspconfig = require 'lspconfig'
+      local configs = require 'lspconfig.configs'
+
+      configs.dts_lsp = {
+        default_config = {
+          cmd = { 'dts-lsp', '--stdio' },
+          filetypes = 'dts',
+          root_dir = function(fname)
+            return lspconfig.util.find_git_ancestor(fname)
+          end,
+          settings = {
+            devicetree = {
+              defaultBindingType = 'Zephyr',
+              defaultIncludePaths = {
+                -- zephyr dts
+                './zephyr/dts',
+                './zephyr/dts/arm',
+                './zephyr/dts/arm64/',
+                './zephyr/dts/riscv',
+                './zephyr/dts/common',
+                './zephyr/include',
+                -- zmk dts
+                './zmk/app/dts',
+                './zmk/app/dts/behaviors',
+                './zmk/app/dts/behaviors.dtsi',
+                './zmk/app/include',
+                -- modules
+                './modules/zmk/adaptive-key/include',
+                './modules/zmk/auto-layer/dts/behaviors',
+                './modules/zmk/auto-layer/dts/behaviors/num_word.dtsi',
+                './modules/zmk/helpers/include',
+                './modules/zmk/leader-key/include',
+              },
+              preferredContext = 0,
+            },
+          },
+        },
+      }
+
+      lspconfig.dts_lsp.setup {}
+
       -- Ensure the servers and tools above are installed
       --
       -- To check the current status of installed tools and/or manually install

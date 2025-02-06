@@ -1,19 +1,19 @@
 -- [[ Setting options ]]
 
 -- Make line numbers default
-vim.opt.number = false
+vim.opt.number = true
 -- relative line numbers, to help with jumping.
 vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
-vim.opt.mouse = "a"
+vim.opt.mouse = 'a'
 
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
 -- Sync clipboard between OS and Neovim.
 vim.schedule(function()
-	vim.opt.clipboard = "unnamedplus"
+  vim.opt.clipboard = 'unnamedplus'
 end)
 
 -- Enable break indent
@@ -27,7 +27,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- Keep signcolumn on by default
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = 'yes'
 
 -- Decrease update time
 vim.opt.updatetime = 250
@@ -43,10 +43,10 @@ vim.opt.splitbelow = true
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
-vim.opt.inccommand = "split"
+vim.opt.inccommand = 'split'
 
 -- Show which line your cursor is on
 vim.opt.cursorline = true
@@ -59,4 +59,25 @@ vim.opt.shiftwidth = 4
 
 vim.opt.termguicolors = true
 
+vim.cmd 'highlight notifybackground guibg=#000000'
+
+-- Create an autogroup named 'cdpwd'
+vim.api.nvim_create_augroup('cdpwd', { clear = true })
+
+-- Create an autocmd within the 'cdpwd' group
+vim.api.nvim_create_autocmd('VimEnter', {
+  group = 'cdpwd',
+  pattern = '*',
+  callback = function()
+    -- Change the current directory to the one from where Neovim was opened
+    vim.cmd('cd ' .. vim.fn.getcwd())
+  end,
+})
+
+vim.api.nvim_create_autocmd('BufEnter', {
+  pattern = { '*.keymap', '*.dtsi', '*.h' },
+  command = 'set filetype=dts',
+})
+
+-- vim.lsp.set_log_level 'debug'
 -- vim: ts=2 sts=2 sw=2 et
