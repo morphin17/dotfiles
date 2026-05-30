@@ -88,10 +88,10 @@ source $ZSH/oh-my-zsh.sh
 # envs
 export EDITOR='nvim'
 
-export PATH="/opt/homebrew/opt/go@1.21/bin:$PATH"
-export PATH="$HOME/go/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="/opt/homebrew/opt/python/libexec/bin:$PATH"
+#export PATH="/opt/homebrew/opt/go@1.21/bin:$PATH"
+#export PATH="$HOME/go/bin:$PATH"
+#export PATH="$HOME/.cargo/bin:$PATH"
+#export PATH="/opt/homebrew/opt/python/libexec/bin:$PATH"
 
 export HOMEBREW_NO_AUTO_UPDATE="true"
 
@@ -110,6 +110,7 @@ export HOMEBREW_NO_AUTO_UPDATE="true"
 # aliases
 alias zshconfig="nvim ~/.zshrc"
 alias chconfig="nvim ~/.local/share/chezmoi"
+alias nvimconfig="nvim ~/.local/share/nvim"
 alias ch="chezmoi"
 alias ll="yazi"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
