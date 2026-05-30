@@ -110,10 +110,23 @@ export HOMEBREW_NO_AUTO_UPDATE="true"
 # aliases
 alias zshconfig="nvim ~/.zshrc"
 alias chconfig="nvim ~/.local/share/chezmoi"
-alias nvimconfig="nvim ~/.local/share/nvim"
+alias nvimconfig="nvim ~/.config/nvim"
 alias ch="chezmoi"
 alias ll="yazi"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+#
+
+function set-title-precmd() {
+  printf "\e]2;%s\a" "${PWD:t}"
+}
+
+function set-title-preexec() {
+  printf "\e]2;%s\a" "$1"
+}
+
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd set-title-precmd
+add-zsh-hook preexec set-title-preexec
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
